@@ -4,7 +4,7 @@ $headerLineNo = 1
 $workSheetName = "Ny Ordre"
 $delimiter = ","
 
-$orderFileName = "NL-Ordre.xlsx"
+$expectedFileName = "NL-Ordre.xlsx"
 $quantityColumnName = "Quantity"
 $productColumnName = "ProductName"
 $priceColumnName = "ProductSalesPrice"
@@ -15,8 +15,8 @@ $data = [System.Collections.ArrayList]@()
 # $Script:LOGFILE = "{0:yyyy}{0:MM}{0:dd}{0:HH}.{0:mm}.{0:ss}.log" -f (Get-Date) # Set name of log file (default: log.log - Obtained by removing this line). Log file is saved to .\log.
 
 # Including Functions
-. .\Log.ps1
-. .\WriteHeader.ps1
+. .\functions\Log.ps1
+. .\functions\WriteHeader.ps1
 
 WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "./out/Orders.csv"
 
@@ -25,7 +25,7 @@ WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "./out/Orders.
 if((Test-Path -Path $inputFolderPath) -eq $false) { Exit 458 }
 
 # Actual Parsing Script 
-Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $orderFileName } | ForEach-Object {
+Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileName } | ForEach-Object {
     $currentFile = "$inputFolderPath\$_"
     Log -Level "Info" -Msg "Parsing File: $currentFile"
 
