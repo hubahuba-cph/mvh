@@ -12,14 +12,13 @@ $priceColumnName = "ProductSalesPrice"
 $ErrorActionPreference = "Stop"
 $data = [System.Collections.ArrayList]@()
 
-# $Script:LOGFILE = "{0:yyyy}{0:MM}{0:dd}{0:HH}.{0:mm}.{0:ss}.log" -f (Get-Date) # Set name of log file (default: log.log - Obtained by removing this line). Log file is saved to .\log.
+# $Script:LOGFILE = "OrderParser.{0:yyyy}{0:MM}{0:dd}{0:HH}.{0:mm}.{0:ss}.log" -f (Get-Date) # Set name of log file (default: log.log - Obtained by removing this line). Log file is saved to .\log.
 
 # Including Functions
 . .\functions\Log.ps1
 . .\functions\WriteHeader.ps1
 
 WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "./out/Orders.csv"
-
 
 # Validations
 if((Test-Path -Path $inputFolderPath) -eq $false) { 
@@ -38,12 +37,9 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
     try {
         Log -Level "Info" -Msg "Reading worksheets.."
         ForEach($workSheet in ($workBook.Sheets | Where-Object { $_.name -eq $workSheetName} )) {        
-            $data.Clear()            
-            $totalNoOfItems = $totalNoOfRecords -1
+            $data.Clear()                        
             $totalNoOfColumns = -1
-    
-            Log -Level "Debug" -Msg "TotalNoOfItems = $totalNoOfItems"
-    
+        
             $dataObj = New-Object PSObject
     
             do {                  
@@ -60,31 +56,31 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
             Log -Level "Debug" -Msg "Reading data lines.."
             
             $rowNum = $headerLineNo        
-            ForEach($row in ($workSheet.UsedRange.Rows | Select-Object -skip $headerLineNo))
+            For($rowNum = 2; $rowNum -le ($workSheet.UsedRange.Rows).Count; $rowNum++)
             {
+                $currentDataObj = $dataObj.PSObject.Copy()
+
                 Log -Level "Debug" -Msg "Reading line no.: $($rowNum)"            
                 For($j = 1; $j -le $totalNoOfColumns; $j++) {
                     $vName = $workSheet.Cells.Item($headerLineNo, $j).text
-                    $Value = $row.Cells.Item($rowNum, $j).text
+                    $Value = $workSheet.Cells.Item($rowNum, $j).text
     
-                    $dataObj.$vName = $Value 
+                    $currentDataObj.$vName = $Value 
                 }
                 
-                $currentQuantity = $dataObj."$quantityColumnName"
-                $productArray = ($dataObj."$productColumnName").split($delimiter)
-                $priceArray = ($dataObj."$priceColumnName").split($delimiter)
+                $currentQuantity = $currentDataObj."$quantityColumnName"
+                $productArray = ($currentDataObj."$productColumnName").split($delimiter)
+                $priceArray = ($currentDataObj."$priceColumnName").split($delimiter)
 
                 Log -Level "Info" -Msg "Order, Quantity: $currentQuantity"
                 
                 $dataObj."$quantityColumnName" = 1
                 for ($k = 0; $k -lt $currentQuantity; $k++) {
-                    $dataObj."$productColumnName" = $productArray[$k].Trim()
-                    $dataObj."$priceColumnName" = $priceArray[$k].Trim()
+                    $currentDataObj."$productColumnName" = $productArray[$k].Trim()
+                    $currentDataObj."$priceColumnName" = $priceArray[$k].Trim()
 
-                    $data.Add($dataObj)
+                    $data.Add($currentDataObj)
                 }
-    
-                $rowNum = $rowNum + 1            
             }            
         }
     
@@ -98,7 +94,6 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
         $PSItem.ScriptStackTrace
     }
     finally {
-
         Log -Level "Info" -Msg "Cleanup.."
 
         $workBook.Close();
