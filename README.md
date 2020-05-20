@@ -4,4 +4,4 @@ Set-ExecutionPolicy: `powershell -Command "Set-ExecutionPolicy -ExecutionPolicy 
 Command:             `powershell .\OrderParser.ps1` (Run it from the folder where OrderParser.ps1 is located)
 
 ### Shipment Data Parser
-Command:             `powershell .\ShippingLabelParser.ps1` (Run it from the folder where OrderParser.ps1 is located)
+Command:             `powershell .\ShippingLabelParser.ps1` (Run it from the folder where ShippingLabelParser.ps1 is located)
