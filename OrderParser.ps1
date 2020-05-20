@@ -22,7 +22,10 @@ WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "./out/Orders.
 
 
 # Validations
-if((Test-Path -Path $inputFolderPath) -eq $false) { Exit 458 }
+if((Test-Path -Path $inputFolderPath) -eq $false) { 
+    Write-Host "Input not found" 
+    Exit 458 
+}
 
 # Actual Parsing Script 
 Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileName } | ForEach-Object {
