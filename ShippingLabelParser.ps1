@@ -95,7 +95,7 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
             }                        
         }
         
-        $data | Export-Csv -Path ./out/Fraktetikett.csv -Delimiter ';' -Force -NoTypeInformation
+        $data | Export-Csv -Path ./out/Fraktetikett.csv -Delimiter ';' -Force -NoTypeInformation -Encoding UTF8
 
         if($itemTmstmp -ne [DateTime]::MinValue) {
             New-Item -Path ".\$tmstmpFile" -Force -Value $itemTmstmp.toString("yyyy-MM-ddTHH.mm.ss.fff")

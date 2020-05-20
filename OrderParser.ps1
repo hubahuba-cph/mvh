@@ -86,7 +86,7 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
     
         Log -Level "Info" -Msg "File parsed"
 
-        $data | Export-Csv -Path ./out/Orders.csv -Delimiter ';' -Force -NoTypeInformation
+        $data | Export-Csv -Path ./out/Orders.csv -Delimiter ';' -Force -NoTypeInformation -Encoding UTF8
     }
     catch {
         Log -Level "Error" -Msg "An error occured.."                    
