@@ -14,5 +14,5 @@ Function Log {
 
     # TODO: Add LogLevel Handling
     New-Item -Path .\log -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
-    Add-Content -Path .\log\$logFile -Encoding UTF8 -Value "$(Get-Date -format "yyyy-MM-ddTHH:mm:ss.FFF") [$($Level.ToUpper())]: $Msg" -Force
+    Add-Content -Path .\log\$logFile -Encoding UTF8 -Value "$(Get-Date -format "yyyy-MM-ddTHH:mm:ss.fff") [$($Level.ToUpper().PadLeft(5, " "))]: $Msg" -Force
 }
