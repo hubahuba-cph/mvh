@@ -5,7 +5,7 @@ Function Log {
     )
 
     if(-not (Test-Path "Variable:\Script:LOGFILE")) {
-        $logFile = "log.log"
+        $logFile = ".\log.log"
         
     }
     else {

@@ -1,5 +1,7 @@
 # Setup Variables and Environment
 $inputFolderPath = "c:\github\mvh\in"
+$outputFolderPath = ".\out"
+
 $headerLineNo = 1
 $workSheetName = "Ny Ordre"
 $delimiter = ","
@@ -18,7 +20,7 @@ $data = [System.Collections.ArrayList]@()
 . .\functions\Log.ps1
 . .\functions\WriteHeader.ps1
 
-WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "./out/Orders.csv"
+WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "$outputFolderPath\Orders.csv"
 
 # Validations
 if((Test-Path -Path $inputFolderPath) -eq $false) { 
@@ -86,7 +88,7 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
     
         Log -Level "Info" -Msg "File parsed"
 
-        $data | Export-Csv -Path ./out/Orders.csv -Delimiter ';' -Force -NoTypeInformation -Encoding UTF8
+        $data | Export-Csv -Path "$outputFolderPath\Orders.csv" -Delimiter ';' -Force -NoTypeInformation -Encoding UTF8
     }
     catch {
         Log -Level "Error" -Msg "An error occured.."                    

@@ -14,8 +14,8 @@ Function WriteHeader {
     Log -Level "Info" -Msg "--------------------------------------------------"
 
     if([String]::IsNullOrEmpty($Log)) {
-        Write-Host -ForegroundColor Green "Log:     ./log.log"
-        Log -Level "Info" -Msg "Log:     ./log.log"
+        Write-Host -ForegroundColor Green "Log:     .\log.log"
+        Log -Level "Info" -Msg "Log:     .\log.log"
     }
     else {
         Write-Host -ForegroundColor Green "Log:     $Log"    

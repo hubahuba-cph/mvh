@@ -1,5 +1,7 @@
 # Setup Variables and Environment
 $inputFolderPath = "c:\github\mvh\in"
+$outputFolderPath = ".\out"
+
 $headerLineNo = 1
 $workSheetName = "Ark1"
 $delimiter = ","
@@ -18,7 +20,7 @@ $data = [System.Collections.ArrayList]@()
 . .\functions\Log.ps1
 . .\functions\WriteHeader.ps1
 
-WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "./out/Fraktetiket.csv"
+WriteHeader -Log $Script:LOGFILE -InPath $inputFolderPath -Output "$outputFolderPath\Fraktetiket.csv"
 
 # Validations
 if((Test-Path -Path $inputFolderPath) -eq $false) { 
@@ -95,7 +97,7 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
             }                        
         }
         
-        $data | Export-Csv -Path ./out/Fraktetikett.csv -Delimiter ';' -Force -NoTypeInformation -Encoding UTF8
+        $data | Export-Csv -Path "$outputFolderPath/Fraktetikett.csv" -Delimiter ';' -Force -NoTypeInformation -Encoding UTF8
 
         if($itemTmstmp -ne [DateTime]::MinValue) {
             New-Item -Path ".\$tmstmpFile" -Force -Value $itemTmstmp.toString("yyyy-MM-ddTHH.mm.ss.fff")
