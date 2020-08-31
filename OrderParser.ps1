@@ -71,17 +71,23 @@ Get-ChildItem -Path $inputFolderPath | Where-Object { $_.name -eq $expectedFileN
                 }
                 
                 $currentQuantity = $currentDataObj."$quantityColumnName"
-                $productArray = ($currentDataObj."$productColumnName").split($delimiter)
-                $priceArray = ($currentDataObj."$priceColumnName").split($delimiter)
-
                 Log -Level "Info" -Msg "Order, Quantity: $currentQuantity"
-                
-                $dataObj."$quantityColumnName" = 1
-                for ($k = 0; $k -lt $currentQuantity; $k++) {
-                    $currentDataObj."$productColumnName" = $productArray[$k].Trim()
-                    $currentDataObj."$priceColumnName" = $priceArray[$k].Trim()
 
-                    $data.Add($currentDataObj)
+                $hasDelimiters = $currentDataObj."$productColumnName".indexOf($delimiter) -gt 0
+
+                $currentDataObj."$quantityColumnName" = 1
+                if($hasDelimiters -eq $true) {
+                    $productArray = ($currentDataObj."$productColumnName").split($delimiter)
+                    $priceArray = ($currentDataObj."$priceColumnName").split($delimiter)                                
+
+                    for ($l = 0; $l -lt $currentQuantity; $l++) {
+                        $currentDataObj."$productColumnName" = $productArray[$l].Trim()
+                        $currentDataObj."$priceColumnName" = $priceArray[$l].Trim()
+    
+                        $data.Add($currentDataObj)
+                    }        
+                } else {
+                    $data.Add($currentDataObj)                        
                 }
             }            
         }
