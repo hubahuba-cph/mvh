@@ -1,4 +1,5 @@
-﻿. .\functions\WriteHeader.ps1
+﻿. .\functions\Log.ps1
+. .\functions\WriteHeader.ps1
 
 WriteHeader -Log $Script:LOGFILE -InPath "N/A" -Output "N/A"
 
