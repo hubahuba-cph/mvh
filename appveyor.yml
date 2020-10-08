@@ -28,3 +28,6 @@ dotnet_csproj:
 build_script:
   - ps: dir
   - ps: dotnet publish src/Console/Console.csproj --configuration Release -p:PublishSingleFile=true --self-contained true --output artifacts --runtime win-x64
+
+  artifacts:
+    - path: '*.exe'
