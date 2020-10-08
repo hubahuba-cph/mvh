@@ -1,0 +1,23 @@
+image: Ubunto2004
+
+platform: x64
+
+init:
+    - export git_tag=$(git describe --tags --abbrev 0)
+  
+    - ps: >- 
+        if([string]::IsNullOrEmpty($env:git_tag)) { $env:git_tag = '0.0.0' } 
+  
+        $normalizedBuildVersion = "$env:git_tag (Build: $env:APPVEYOR_BUILD_NUMBER)"
+        
+        $env:docker_tag = $normalizedBuildVersion.Replace(' ', '').Replace('(', '-').Replace(':','-').Trim(')')
+  
+        Write-Output "Version using git tag determined as: $normalizedBuildVersion"
+        
+        Update-AppVeyorBuild -version $normalizedBuildVersion
+
+build_script:
+  - ps: dotnet publish src/Console/Console.csproj --configuration Release -p:PublishSingleFile=true --self-contained true --output artifacts --runtime win-x64
+
+artifacts:
+  - path: *.exe    

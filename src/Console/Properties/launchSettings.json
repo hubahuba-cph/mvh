@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OrderParser": {
+      "commandName": "Project",
+      "commandLineArgs": "ShippingLabelParser --input c:\\users\\mlg\\temp\\in\\NL_Fraktetikett.xlsx --output c:\\users\\mlg\\temp\\out\\ShippingLabels.csv --header-line-no 1 --ws-name \"Ark1\" --point-in-time-file c:\\temp\\cut-off.tmstmp"
+    }
+  }
+}

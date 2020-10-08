@@ -1,3 +1,7 @@
 **/*.log
 **/*.xlsx
 **/*.csv
+**/out
+**/bin
+**/.vs
+**/obj
