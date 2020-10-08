@@ -1,6 +1,6 @@
 **/*.log
-**/*.xlsx
-**/*.csv
+**/**/*.xlsx
+**/**/*.csv
 **/out
 **/bin
 **/.vs
