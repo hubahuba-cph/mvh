@@ -16,6 +16,15 @@ init:
         
         Update-AppVeyorBuild -version $normalizedBuildVersion
 
+dotnet_csproj:
+    patch: true
+    file: '**\*.csproj'
+    version: '{APPVEYOR_BUILD_VERSION}'
+    package_version: '{APPVEYOR_BUILD_VERSION}'
+    assembly_version: '{APPVEYOR_BUILD_VERSION}'
+    file_version: '{APPVEYOR_BUILD_VERSION}'
+    informational_version: '{APPVEYOR_BUILD_VERSION}'
+          
 build_script:
   - ps: dotnet publish src/Console/Console.csproj --configuration Release -p:PublishSingleFile=true --self-contained true --output artifacts --runtime win-x64
 
