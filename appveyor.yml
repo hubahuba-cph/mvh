@@ -33,3 +33,5 @@ after_build:
 
 artifacts:
   - path: 'artifacts/*.zip'
+    name: cli-parsers
+    type: zip
