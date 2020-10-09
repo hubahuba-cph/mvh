@@ -30,6 +30,9 @@ build_script:
   - ps: dotnet publish src/Console/Console.csproj --configuration Release -p:PublishSingleFile=true --self-contained true --output artifacts --runtime win-x64
 
   - ps: dir artifacts
-   
+  
+after_build:
+  - ps: 7z a artifacts/cli-parsers.zip %APPVEYOR_BUILD_FOLDER%\artifacts*.exe
+
 artifacts:
-  - path: 'artifacts/*.exe'
+  - path: 'artifacts/*.zip'
