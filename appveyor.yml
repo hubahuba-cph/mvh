@@ -32,7 +32,7 @@ build_script:
   - ps: dir artifacts
   
 after_build:
-  - ps: 7z a artifacts/cli-parsers.zip %APPVEYOR_BUILD_FOLDER%\artifacts*.exe
+  - ps: 7z a artifacts/cli-parsers.zip %APPVEYOR_BUILD_FOLDER%/artifacts/*.exe
 
 artifacts:
   - path: 'artifacts/*.zip'
