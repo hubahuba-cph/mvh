@@ -29,7 +29,8 @@ build_script:
   - ps: dotnet publish src/Console/Console.csproj --configuration Release -p:PublishSingleFile=true --self-contained true --output artifacts --runtime win-x64
   
 after_build:
-  - ps: 7z a artifacts/cli-parsers.zip artifacts/*.exe
+  - ps: cd artifacts
+  - ps: 7z a cli-parsers.zip *.exe
 
 artifacts:
   - path: 'artifacts/*.zip'
