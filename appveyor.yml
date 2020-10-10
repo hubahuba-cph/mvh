@@ -44,9 +44,11 @@ artifacts:
     type: zip
 
 deploy:
+  provider: GitHub
+  auth_token: 
+    secure: 1HHWwzsrPc8vT07igNUYjJ3KLQdXf4Qsk8z4fdBN2CtajjwumweTXNGilZ77q8iM
   release: cli-parser $(APPVEYOR_BUILD_VERSION)
   description: 'Release: cli-parser {APPVEYOR_BUILD_VERSION}'
-  provider: GitHub
   artifact: cli-parsers
   draft: true
   prerelease: true
