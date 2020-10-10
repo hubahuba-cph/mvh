@@ -15,8 +15,6 @@ init:
   
         $normalizedBuildVersion = "$env:git_tag (Build: $env:APPVEYOR_BUILD_NUMBER)"
 
-        $env:GIT_TAG_NAME = "v${env:git_tag}-$env:APPVEYOR_BUILD_NUMBER"
-
         $env:docker_tag = $normalizedBuildVersion.Replace(' ', '').Replace('(', '-').Replace(':','-').Trim(')')
   
         Write-Output "Version using git tag determined as: $normalizedBuildVersion"
