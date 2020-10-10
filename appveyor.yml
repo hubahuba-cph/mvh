@@ -38,15 +38,15 @@ artifacts:
     type: zip
 
 deploy:
-    Release: cli-parser $(APPVEYOR_BUILD_VERSION)
-    description: 'Release: cli-parser {APPVEYOR_BUILD_VERSION}'
-  - provider: GitHub
-    artifact: cli-parsers
-    draft: true
-    prerelease: true
-    tag: $(APPVEYOR_BUILD_VERSION)
-    on: 
-      APPVEYOR_REPO_TAG: true
-      configuration: Release
-      branch: master
+  release: cli-parser $(APPVEYOR_BUILD_VERSION)
+  description: 'Release: cli-parser {APPVEYOR_BUILD_VERSION}'
+  provider: GitHub
+  artifact: cli-parsers
+  draft: true
+  prerelease: true
+  tag: $(APPVEYOR_BUILD_VERSION)
+  on: 
+    APPVEYOR_REPO_TAG: true
+    configuration: Release
+    branch: master
   
