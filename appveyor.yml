@@ -30,9 +30,23 @@ build_script:
   
 after_build:
   - ps: cd artifacts
-  - ps: 7z a cli-parsers.zip *.exe
+  - ps: 7z a cli-parser.zip *.exe
 
 artifacts:
   - path: 'artifacts/*.zip'
-    name: cli-parsers
+    name: cli-parser
     type: zip
+
+deploy:
+    Release: cli-parser $(APPVEYOR_BUILD_VERSION)
+    description: 'Release: cli-parser {APPVEYOR_BUILD_VERSION}'
+  - provider: GitHub
+    artifact: cli-parsers
+    draft: true
+    prerelease: true
+    tag: $(APPVEYOR_BUILD_VERSION)
+    on: 
+      APPVEYOR_REPO_TAG: true
+      configuration: Release
+      branch: master
+  
