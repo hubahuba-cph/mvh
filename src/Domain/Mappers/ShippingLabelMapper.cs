@@ -20,7 +20,7 @@ namespace Domain.Mappers
 
         public IEnumerable<ShippingLabel> Map(IExcelDataReader dataReader)
         {
-            _logger.LogInformation($"Map using OrderMapper.");
+            _logger.LogInformation($"Map using ShippingLabelMapper.");
 
             yield return new ShippingLabel
             {
