@@ -52,8 +52,8 @@ deploy:
   release: cli-parser, $(APPVEYOR_BUILD_VERSION)
   description: 'Release: cli-parser'
   artifact: cli-parser
-  draft: true
-  prerelease: true
+  draft: false
+  prerelease: false
   tag: $(GIT_TAG_NAME)
   on: 
     APPVEYOR_REPO_TAG: false
