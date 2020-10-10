@@ -46,7 +46,7 @@ deploy:
   prerelease: true
   tag: $(APPVEYOR_BUILD_VERSION)
   on: 
-    #APPVEYOR_REPO_TAG: true
+    APPVEYOR_REPO_TAG: false
     configuration: Release
     branch: master
   
