@@ -15,7 +15,9 @@ init:
         if([string]::IsNullOrEmpty($env:git_tag)) { $env:git_tag = '0.0.0' } 
   
         $normalizedBuildVersion = "$env:git_tag (Build: $env:APPVEYOR_BUILD_NUMBER)"
-        
+
+        $env:GIT_TAG_NAME = "v${env:git_tag}-$env:APPVEYOR_BUILD_NUMBER"
+
         $env:docker_tag = $normalizedBuildVersion.Replace(' ', '').Replace('(', '-').Replace(':','-').Trim(')')
   
         Write-Output "Version using git tag determined as: $normalizedBuildVersion"
@@ -52,7 +54,7 @@ deploy:
   artifact: cli-parser
   draft: true
   prerelease: true
-  tag: $(APPVEYOR_BUILD_VERSION)
+  tag: $(GIT_TAG_NAME)
   on: 
     APPVEYOR_REPO_TAG: false
     configuration: Release
