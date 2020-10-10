@@ -4,6 +4,10 @@ platform: x64
 
 configuration: Release
 
+environment:
+  configuration: Release
+
+
 init:
     - export git_tag=$(git describe --tags --abbrev 0)
   
