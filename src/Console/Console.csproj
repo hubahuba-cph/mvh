@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>cli-parsers</AssemblyName>
+    <AssemblyName>cli-parser</AssemblyName>
     <RootNamespace>Console</RootNamespace>
   </PropertyGroup>
 
