@@ -1,6 +1,7 @@
 image: Ubuntu2004
 
 platform: x64
+
 configuration: Release
 
 init:
