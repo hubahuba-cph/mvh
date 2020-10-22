@@ -19,10 +19,13 @@ namespace OrderParser
         public static IContainer Configure()
         {
             var services = ConfigureServices();
-
             var containerBuilder = new ContainerBuilder();
 
-            containerBuilder.RegisterSerilog(new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Console());
+            containerBuilder.RegisterSerilog(new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.File($"log/{nameof(OrderParser)}.log", rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760, retainedFileCountLimit: 5)
+                .WriteTo.Console()
+            );
 
             containerBuilder.RegisterType<CommandLineConfig>().AsSelf();
 

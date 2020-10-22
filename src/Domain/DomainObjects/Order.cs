@@ -4,7 +4,7 @@ namespace Domain.DomainObjects
 {
     public class Order
     {
-        public int OrderNo { get; set; }
+        public string OrderNo { get; set; }
         public DateTime OrderDate { get; set; }
         public int RecurringInvoiceActive { get; internal set; }
         public string RecurringInvoiceRepeatTimes { get; internal set; }

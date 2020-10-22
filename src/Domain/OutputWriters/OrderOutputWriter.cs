@@ -38,6 +38,7 @@ namespace Domain.OutputWriters
                     
                     foreach (var order in distinctOrders)
                     {
+                        _logger.LogInformation($"Writing order: {order} to file");
                         var currentOrder = list.Where(i => i.OrderNo == order);
                         var isFirst = true;
 

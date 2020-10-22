@@ -24,6 +24,10 @@ namespace Domain.Handlers
 
         public async Task RunAsync(OrderHandlerOptions options)
         {
+            _logger.LogInformation("Input:     {0}", options.InputFile.FullName);
+            _logger.LogInformation("Output:    {0}", options.OutputFile.FullName);
+            _logger.LogInformation("Worksheet: {0}", options.WorksheetName);
+
             var list = ProcessFiles(options, (orders) => true, (reader) => _mapper.Map(reader, options.Delimiter));
 
             _logger.LogInformation($"Writing file: {options.OutputFile.FullName}");

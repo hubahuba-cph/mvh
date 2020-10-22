@@ -21,11 +21,13 @@ namespace Domain.Mappers
 
             var quantity = dataReader.GetValue(70) == null ? 1 : (int)dataReader.GetDouble(70);
 
+            _logger.LogInformation("Order, quantity: {0}", quantity);
             if (quantity > 1)
             {
                 var productNameColumnContent = dataReader.GetString(57);
                 var hasDelimiters = productNameColumnContent.IndexOf(delimiter) > 0;
 
+                _logger.LogInformation("Split productname: {0}", hasDelimiters);
                 if (hasDelimiters)
                 {
                     var productNames = productNameColumnContent.Split(delimiter);
@@ -46,12 +48,16 @@ namespace Domain.Mappers
                     yield return Read(dataReader);
                 }
             }
+            else
+            {
+                yield return Read(dataReader);
+            }
         }
 
         public Order Read(IExcelDataReader dataReader) =>
             new Order
             {
-                OrderNo = (int)dataReader.GetDouble(0),
+                OrderNo = dataReader.GetString(0),
                 OrderDate = DateTime.Parse(dataReader.GetString(1)),
                 RecurringInvoiceActive = (int)dataReader.GetDouble(2),
                 RecurringInvoiceRepeatTimes = string.Empty,
