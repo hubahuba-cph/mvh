@@ -19,6 +19,8 @@ Examples:
 
     cli-parser.exe ShippingLabelParser --input c:\temp\in\NL_Fraktetikett.xlsx --output c:\temp\out\ShippingLabels.csv --header-line-no 1 --ws-name "Ark1" --point-in-time-file c:\temp\cut-off.tmstmp
 ```
+## Logging 
+Log messages are included in both console and log/[ParserName].log.
 
 ## Powershell Tools
 Set-ExecutionPolicy: `powershell -Command "Set-ExecutionPolicy -ExecutionPolicy ByPass  -Scope CurrentUser"` (Maybe needed to run these CmdLet)
